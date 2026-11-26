@@ -1,0 +1,31 @@
+/* The site's top bar and foot. Self-contained: the roadmap page loads only this file beside its own styles. */
+:root {
+  --night: #191c12; --night-ink: #ebe5cc; --brass: #e6b730;
+  --c-display: "Saira Stencil One", "Arial Black", Impact, sans-serif;
+  --c-body: "Barlow Semi Condensed", "Arial Narrow", "Segoe UI", system-ui, sans-serif;
+  --c-type: "Special Elite", "Courier New", ui-monospace, monospace;
+}
+.site-wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 16px; z-index: 50; background: var(--night); color: var(--night-ink); padding: 8px 12px; }
+/* ------------------------------------------------------------------ the top bar */
+.site-top { position: sticky; top: 0; z-index: 20; background: var(--night); color: var(--night-ink); border-bottom: 3px solid var(--brass); }
+.site-top .site-wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; }
+.brand { font: 400 22px/1 var(--c-display); letter-spacing: .02em; text-decoration: none; color: var(--brass); white-space: nowrap; }
+.brand span { color: var(--night-ink); }
+.nav { display: flex; gap: 4px 18px; flex-wrap: wrap; justify-content: flex-end; }
+.nav a { color: inherit; font: 600 15px/1 var(--c-body); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; padding: 8px 0 5px; border-bottom: 2px solid transparent; }
+.nav a:hover, .nav a[aria-current="page"] { border-bottom-color: var(--brass); }
+.nav a.play { color: var(--brass); }
+@media (max-width: 560px) { .brand { font-size: 18px; } .nav { gap: 2px 14px; flex-wrap: nowrap; } .nav a { font-size: 14px; letter-spacing: .05em; } .nav a.wide { display: none; } }
+
+/* ------------------------------------------------------------------ the foot */
+.site-foot { background: var(--night); color: var(--night-ink); border-top: 3px solid var(--brass); padding: 36px 0 44px; font: 500 16px/1.5 var(--c-body); }
+.site-foot .site-wrap { display: grid; gap: 18px; }
+.site-foot .cols { display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: space-between; align-items: start; }
+.site-foot a { color: var(--brass); }
+.site-foot .fine { font: 400 13px/1.5 var(--c-type); color: #aba68b; max-width: 90ch; }
+.site-foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }

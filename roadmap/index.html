@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roadmap – FRONTS 1944</title>
+<meta name="description" content="The FRONTS 1944 roadmap: every step of the game&#x27;s development, taken or planned, on one operations map.">
+<link rel="canonical" href="https://fronts1944.com/roadmap/">
+<meta property="og:title" content="Roadmap – FRONTS 1944">
+<meta property="og:description" content="The FRONTS 1944 roadmap: every step of the game&#x27;s development, taken or planned, on one operations map.">
+<meta property="og:image" content="https://fronts1944.com/assets/img/social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&family=Saira+Stencil+One&family=Special+Elite&display=swap">
+<link rel="stylesheet" href="../assets/chrome.css">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-top">
+  <div class="site-wrap">
+    <a class="brand" href="../">FRONTS <span>1944</span></a>
+    <nav class="nav" aria-label="Site">
+      <a href="../#game" class="wide">The game</a>
+      <a href="../roadmap/" aria-current="page">Roadmap</a>
+      <a href="../devlog/">Devlog</a>
+      <a href="https://comeandgetsome.itch.io/fronts-1944" class="play">Play</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: a map table. One advance route runs down the sheet; the objectives are pinned left and right of it in the order
+   they were (or will be) taken, and today's front line is drawn across the route. */
+:root {
+  --paper: #e2d9bb;        /* the map sheet */
+  --paper-deep: #d3c8a2;   /* bands and wells */
+  --card: #f0e9d2;         /* a pinned photograph's mount */
+  --ink: #22261a;
+  --ink-soft: #55583f;
+  --grid: #b9ad84;         /* map grid and hairlines */
+  --olive: #4c5a31;
+  --gold: #8a6500;         /* stencil titles */
+  --own: #2b5987;          /* own forces: blue */
+  --foe: #a5311d;          /* the enemy and the fight: red */
+  --taken: #3d6a2e;        /* a taken objective */
+  --shade: rgba(40, 36, 18, .28);
+  --display: "Saira Stencil One", "Arial Black", Impact, sans-serif;
+  --body: "Barlow Semi Condensed", "Arial Narrow", "Segoe UI", system-ui, sans-serif;
+  --type: "Special Elite", "Courier New", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14170f; --paper-deep: #1c2015; --card: #252a1b; --ink: #ebe5cc; --ink-soft: #aba68b; --grid: #3c432f;
+    --olive: #90a260; --gold: #e6b730; --own: #7aaddf; --foe: #e56a50; --taken: #8aba6d; --shade: rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14170f; --paper-deep: #1c2015; --card: #252a1b; --ink: #ebe5cc; --ink-soft: #aba68b; --grid: #3c432f;
+  --olive: #90a260; --gold: #e6b730; --own: #7aaddf; --foe: #e56a50; --taken: #8aba6d; --shade: rgba(0, 0, 0, .5);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--grid) 34%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--grid) 34%, transparent) 1px, transparent 1px);
+  background-size: 96px 96px;
+  color: var(--ink);
+  font: 500 17px/1.45 var(--body);
+}
+.wrap {
+  max-width: 1120px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow { font: 400 13px/1.3 var(--type); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+h1 { font: 400 clamp(44px, 9vw, 92px)/.95 var(--display); color: var(--gold); margin: 6px 0 4px; letter-spacing: .01em; text-wrap: balance; }
+.lede { max-width: 62ch; margin: 0; color: var(--ink-soft); font-size: 19px; }
+.tally { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 22px 0 10px; align-items: baseline; }
+.tally b { font: 400 34px/1 var(--display); margin-right: 8px; font-variant-numeric: tabular-nums; }
+.tally span { font: 400 13px/1 var(--type); letter-spacing: .08em; text-transform: uppercase; }
+.tally .t-done b { color: var(--taken); } .tally .t-now b { color: var(--foe); } .tally .t-ahead b { color: var(--own); }
+.bar { display: flex; height: 12px; border: 2px solid var(--ink); background: var(--paper-deep); }
+.bar i { display: block; height: 100%; }
+.bar .b-done { background: var(--taken); } .bar .b-now { background: var(--foe); }
+.bar .b-ahead { background: repeating-linear-gradient(135deg, var(--own) 0 6px, transparent 6px 12px); }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 22px 0 6px; }
+.chip {
+  font: 600 15px/1 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--ink);
+  background: transparent; border: 2px solid var(--ink); padding: 9px 14px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.chip:focus-visible, .open:focus-visible, .x:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.hint { font: 400 13px/1.4 var(--type); color: var(--ink-soft); margin: 10px 0 0; }
+
+/* the route and its objectives */
+.tl { position: relative; margin-top: 30px; display: grid; gap: 26px; }
+.tl::before {            /* the advance route: solid where taken (set from script), dashed ahead */
+  content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 6px; margin-left: -3px;
+  background: linear-gradient(to bottom, var(--own) 0 var(--reach, 50%), transparent var(--reach, 50%)),
+              repeating-linear-gradient(to bottom, var(--own) 0 12px, transparent 12px 24px);
+}
+.step { display: grid; grid-template-columns: 1fr 64px 1fr; align-items: start; position: relative; }
+.step .card { grid-column: 1; }
+.step:nth-of-type(even) .card { grid-column: 3; }
+.step .pin { grid-column: 2; grid-row: 1; justify-self: center; margin-top: 18px; }
+.step[hidden] { display: none; }
+.pin {
+  width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; position: relative; z-index: 1;
+  font: 400 19px/1 var(--display); background: var(--paper); border: 4px solid var(--own); color: var(--own);
+  font-variant-numeric: tabular-nums;
+}
+.s-done .pin { background: var(--taken); border-color: var(--taken); color: var(--paper); }
+.s-now .pin { background: var(--foe); border-color: var(--foe); color: var(--paper); }
+.s-now .pin::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; border: 2px solid var(--foe); animation: ping 1.8s ease-out infinite; }
+.card {
+  background: var(--card); border: 2px solid var(--ink); box-shadow: 5px 6px 0 var(--shade); min-width: 0;
+  transform: rotate(var(--tilt, 0deg)); transition: transform .25s ease, box-shadow .25s ease;
+}
+.step:nth-of-type(3n) .card { --tilt: .5deg; } .step:nth-of-type(3n+1) .card { --tilt: -.45deg; }
+.shot { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--paper-deep); border-bottom: 2px solid var(--ink); }
+.shot img { display: block; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 60%; }
+.shot .none {
+  position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 12px;
+  font: 400 14px/1.4 var(--type); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft);
+  background: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--grid) 55%, transparent) 14px 16px);
+}
+.kind { position: absolute; left: 8px; top: 8px; font: 400 11px/1 var(--type); letter-spacing: .1em; padding: 5px 7px 4px; background: var(--ink); color: var(--paper); }
+.kind.concept { background: var(--gold); color: var(--paper); }
+.txt { padding: 14px 16px 16px; display: grid; gap: 8px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between; }
+.when { font: 400 13px/1 var(--type); letter-spacing: .08em; color: var(--ink-soft); }
+.stamp { font: 400 14px/1 var(--display); letter-spacing: .06em; padding: 5px 8px 4px; border: 2px solid currentColor; transform: rotate(-3deg); }
+.s-done .stamp { color: var(--taken); } .s-now .stamp { color: var(--foe); } .s-ahead .stamp { color: var(--own); border-style: dashed; }
+h3 { font: 700 25px/1.1 var(--body); margin: 0; text-wrap: balance; letter-spacing: .01em; }
+.card ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; color: var(--ink); }
+.card li::marker { color: var(--olive); }
+.open {
+  justify-self: start; font: 600 14px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
+  background: transparent; border: 0; border-bottom: 2px solid var(--gold); padding: 6px 0 3px; cursor: pointer;
+}
+/* an objective under fire */
+.step.live .card { transform: rotate(calc(var(--tilt, 0deg) * -2)) translateY(-5px); box-shadow: 9px 12px 0 var(--shade); animation: rumble .32s linear infinite; }
+.step.live .shot img { animation: pan 5s ease-in-out infinite alternate; }
+.step.live .pin { animation: hop .5s ease-in-out infinite alternate; }
+.step.hit .card { animation: jolt .22s ease-out; }
+@keyframes rumble { 0%, 100% { translate: 0 0; } 25% { translate: .8px -.6px; } 50% { translate: -.7px .5px; } 75% { translate: .5px .7px; } }
+@keyframes jolt { 0% { translate: 0 0; } 30% { translate: -4px 3px; } 60% { translate: 3px -2px; } 100% { translate: 0 0; } }
+@keyframes pan { from { transform: scale(1.04) translate(0, 0); } to { transform: scale(1.16) translate(-2.5%, -2%); } }
+@keyframes hop { from { translate: 0 0; } to { translate: 0 -5px; } }
+@keyframes ping { from { transform: scale(.7); opacity: .9; } to { transform: scale(1.5); opacity: 0; } }
+/* today's front line */
+.front { grid-column: 1 / -1; position: relative; text-align: center; padding: 22px 0; z-index: 1; }
+.front::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 14px; margin-top: -7px;
+  background:
+    linear-gradient(135deg, var(--foe) 25%, transparent 25%) 0 0 / 20px 14px,
+    linear-gradient(225deg, var(--foe) 25%, transparent 25%) 0 0 / 20px 14px,
+    linear-gradient(to bottom, transparent 5px, var(--foe) 5px 9px, transparent 9px);
+}
+.front span { position: relative; display: inline-block; background: var(--paper); border: 2px solid var(--foe); color: var(--foe); padding: 8px 14px 6px; font: 400 17px/1 var(--display); letter-spacing: .08em; }
+/* the scout that drives to the objective you point at */
+.scout { position: absolute; left: 50%; top: 0; width: 34px; height: 46px; margin-left: -17px; z-index: 2; transition: top .7s cubic-bezier(.4, .1, .2, 1); pointer-events: none; }
+.scout svg { display: block; width: 100%; height: 100%; }
+.scout.rolling svg { animation: rumble .2s linear infinite; }
+.foot { margin-top: 44px; padding-top: 16px; border-top: 2px solid var(--ink); display: grid; gap: 8px; color: var(--ink-soft); font-size: 16px; max-width: 78ch; }
+.foot b { color: var(--ink); }
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
+/* the dossier */
+dialog { border: 3px solid var(--ink); background: var(--card); color: var(--ink); padding: 0; width: min(880px, calc(100vw - 24px)); max-height: calc(100vh - 32px); box-shadow: 10px 12px 0 var(--shade); }
+dialog::backdrop { background: rgba(10, 12, 6, .72); }
+.dz { padding: 18px 20px 22px; display: grid; gap: 14px; }
+.dz header { display: flex; gap: 12px; align-items: start; justify-content: space-between; }
+.dz h2 { font: 400 clamp(26px, 5vw, 40px)/1 var(--display); color: var(--gold); margin: 6px 0 0; text-wrap: balance; }
+.x { font: 700 15px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; background: var(--ink); color: var(--paper); border: 0; padding: 10px 12px; cursor: pointer; }
+.pics { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.pics figure { margin: 0; border: 2px solid var(--ink); background: var(--paper-deep); }
+.pics img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.pics figcaption { font: 400 12px/1.35 var(--type); letter-spacing: .04em; padding: 7px 9px 6px; color: var(--ink-soft); }
+.dz h4 { font: 400 13px/1 var(--type); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin: 4px 0 -6px; }
+.dz ul { margin: 0; padding-left: 20px; display: grid; gap: 5px; }
+@media (min-width: 761px) { .step + .step { margin-top: -170px; } }   /* left and right objectives interlock along the route */
+@media (max-width: 760px) {
+  .tl::before { left: 23px; }
+  .step, .step:nth-of-type(even) { grid-template-columns: 46px 1fr; column-gap: 12px; }
+  .step .card, .step:nth-of-type(even) .card { grid-column: 2; }
+  .step .pin { grid-column: 1; }
+  .scout { left: 23px; margin-left: -17px; top: 0; opacity: 0; }
+  .card { --tilt: 0deg !important; }
+  h3 { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .step.live .card, .step.live .shot img, .step.live .pin, .s-now .pin::after, .scout.rolling svg { animation: none; }
+  .scout { transition: none; }
+}
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">Operations map &middot; situation of 22 November 2026</div>
+  <h1>FRONTS 1944</h1>
+  <p class="lede">The campaign so far and the ground still ahead. Every objective is one step of the game's development, in the order it was taken or is planned.</p>
+
+  <div class="tally" id="tally"></div>
+  <div class="bar" id="bar" role="img" aria-label="Share of objectives taken, under attack and ahead"></div>
+
+  <div class="tools" role="group" aria-label="Show objectives">
+    <button class="chip" data-f="all" aria-pressed="true">All</button>
+    <button class="chip" data-f="done" aria-pressed="false">Taken</button>
+    <button class="chip" data-f="now" aria-pressed="false">Under attack</button>
+    <button class="chip" data-f="ahead" aria-pressed="false">Ahead</button>
+  </div>
+  <p class="hint">Point at an objective to bring it under fire. Open its dossier for more pictures and what is still missing.</p>
+
+  <div class="tl" id="tl">
+    <div class="scout" id="scout" aria-hidden="true">
+      <svg viewBox="0 0 34 46"><rect x="2" y="3" width="7" height="40" rx="2" fill="var(--ink)"/><rect x="25" y="3" width="7" height="40" rx="2" fill="var(--ink)"/><rect x="7" y="7" width="20" height="33" rx="3" fill="var(--olive)" stroke="var(--ink)" stroke-width="2"/><circle cx="17" cy="25" r="7.5" fill="var(--olive)" stroke="var(--ink)" stroke-width="2"/><rect x="15.4" y="25" width="3.2" height="20" fill="var(--ink)"/></svg>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><b>How to read it.</b> "Taken" means built and in the latest test build, not that it is released: the public build is older. "In game" pictures are the game's own frames; "concept" pictures were generated as targets for the look and are not the game.</div>
+    <div><b>Source.</b> The project's design documents, the open log and the code on the working branch, read on 22 November 2026.</div>
+  </div>
+</div>
+
+<canvas id="fx" aria-hidden="true"></canvas>
+<dialog id="dossier" aria-labelledby="dz-title"><div class="dz" id="dz"></div></dialog>
+
+<script>
+/* ---------------------------------------------------------------- the objectives, in order */
+const G = "game", C = "concept";
+const STEPS = [
+  { s: "done", when: "September 2026", title: "First shots", fx: "guns",
+    imgs: [["cubes_tank_trench", G, "The cube look of the first weeks. It is still in the game as a setting."], ["cubes_village", G, "Shermans and infantry attack a village, version 0.3."]],
+    lines: ["A prototype built in a day: squads, capture points, trenches, an AI opponent.", "Soldiers and tanks are cubes, and the battle already reads at a glance."] },
+  { s: "done", when: "September 2026", title: "The 1944 arsenal", fx: "guns",
+    imgs: [["codex", G, "The arsenal codex over the battle."], ["telegram", G, "A squad reports by telegram: objective taken."]],
+    lines: ["Historic weapons, vehicles, guns and aircraft, each with its rarity.", "Experience, wounded men, repairs.", "Orders go out as missions and the squads answer by telegram."] },
+  { s: "done", when: "14 September 2026", title: "Rails, rivers and engineers", fx: "train",
+    imgs: [["train", G, "A supply train runs past a town fight."], ["build_ghost", G, "An engineer squad places a trench."]],
+    lines: ["Supply trains run to the front and stations matter.", "Rivers with bridges that can be blown and repaired.", "Engineers build nests and trenches; aircraft need hangars."] },
+  { s: "done", when: "September 2026", title: "The field-HQ interface", fx: "flare",
+    imgs: [["hud_attack", G, "Three squads, the orders card and an attack stamp on a house."], ["unit_card", G, "The unit card of an armoured car."]],
+    lines: ["The whole screen rebuilt as a 1944 headquarters: unit cards, dispatches, a minimap.", "Orders are stamps you put on the map."] },
+  { s: "done", when: "19 September 2026", title: "Weather, heavy bombers, paratroopers", fx: "storm",
+    imgs: [["lightning", G, "A thunderstorm over a dug-in line."], ["carpet_order", G, "A carpet raid drawn along a street."], ["carpet_street", G, "The carpet comes down the street."]],
+    lines: ["Storms ground the planes; snow, rain and night change the fight.", "Heavy bombers fly a strip you draw on the map.", "Transports drop a squad of paratroopers where you aim."] },
+  { s: "done", when: "19 to 27 September 2026", title: "Team battles, online", fx: "guns",
+    imgs: [["front_3v3", G, "A 3v3 front seen from above."]],
+    lines: ["2v2 and 3v3 over LAN and Radmin, played for a whole evening on 19 September.", "Its own lobby and relay server on the internet since 25 September.", "Lobby map, chat, and a battle report for every player."],
+    more: ["Not tried yet: multiplayer with the three newest nations."] },
+  { s: "done", when: "20 to 22 September 2026", title: "House to house", fx: "fire",
+    imgs: [["house_open", G, "A held house with its roof open: the garrison inside."], ["house_bunker", G, "A house fortified level by level."], ["flamethrower", G, "A flamethrower team storms a house, version 0.3."]],
+    lines: ["Roofs open where you need to look in. Doors, grenades, smoke.", "Rooms and doorways inside buildings: the first stage of indoor fighting.", "Engineers fortify a house up to a bunker."] },
+  { s: "done", when: "2 October 2026", title: "0.5: campaign, Hold the Line, supply", fx: "guns",
+    imgs: [["hq", G, "The headquarters and its production."], ["report", G, "The after-action report."]],
+    lines: ["A tutorial campaign that teaches the mechanics lesson by lesson.", "Hold the Line: defend against waves.", "Ammunition, heavy anti-aircraft guns, small and large buildings, medals and a service record."] },
+  { s: "done", when: "15 October 2026", title: "0.4 packed for release", fx: "flare",
+    imgs: [["snow", G, "A winter front: a bomb on the river crossing."]],
+    lines: ["A Windows build and a browser demo, checked and packed with their notes.", "Not uploaded: the decision was to make the next public release a bigger one."] },
+  { s: "done", when: "October to November 2026", title: "From cubes to models", fx: "tanks",
+    imgs: [["sherman_river", G, "A Sherman crosses a river."], ["chiha", G, "A Type 97 Chi-Ha in a village."]],
+    lines: ["Soldiers, tanks, guns and aircraft as 3D models: 210 in the game.", "Turrets turn, guns traverse, propellers spin.", "The cube look stays as a setting."],
+    more: ["Recoil still slides the whole gun on most models."] },
+  { s: "done", when: "October to November 2026", title: "Coasts and the first landings", fx: "naval",
+    imgs: [["navy_board", G, "A Pacific island with the Navy board open."]],
+    lines: ["Maps can end in the sea: beaches, piers, reefs, deep water.", "Swimming tanks and landing craft, ordered from a Navy board."],
+    more: ["The landing craft is still a plain blue box without a model."] },
+  { s: "done", when: "21 November 2026", title: "The Pacific", fx: "naval",
+    imgs: [["lagoon", G, "A lagoon and its causeway, in the game."], ["c_lagoon", C, "The concept picture the water and the causeway were built toward."], ["cave", G, "A cave strongpoint."]],
+    lines: ["Islands with lagoons, jungle, swamps, ridges and caves; cane railways and coral airstrips.", "Palms, jungle trees and cave mouths modelled from concept pictures; painted water.", "Built in the fast lane in two days."],
+    more: ["The long checks were skipped and are listed in the open log.", "An open cave shows a flat dark floor."] },
+  { s: "done", when: "21 November 2026", title: "Japan, Italy, Hungary", fx: "tanks",
+    imgs: [["zrinyi", G, "A Hungarian Zrinyi II fires its 105 mm."], ["setup", G, "Seven nations on the battle setup page."], ["c_turan", C, "Concept picture of the Turan II, the target for its model."]],
+    lines: ["Three more playable nations: seven in all.", "Arsenals of 86, 80 and 72 entries, each with its own soldiers and AI.", "68 new models."],
+    more: ["89 unit types still borrow a neighbour's model.", "Only one automated battle per nation was run for balance."] },
+  { s: "done", when: "22 November 2026", title: "Paratroopers under real canopies", fx: "paras",
+    imgs: [["paratroopers", G, "Japanese paratroopers come down on a river town."], ["thumb", G, "The thumbnail of the features teaser."]],
+    lines: ["The last cubes in the sky are gone: soldier figures hang under panelled canopies.", "Two teasers, 24 new screenshots and test copy 8."],
+    more: ["The fallen canopy is a flat disc.", "Nobody has played test copy 8 by hand yet."] },
+  { s: "now", when: "In progress", title: "Playtest headquarters", fx: "flare",
+    imgs: [["discord_icon", G, "The icon of the testers' Discord server."]],
+    lines: ["A Discord server for testers: bug-report forums, announcements, find-a-game.", "The kit is ready and tested on this PC.", "Waiting for three steps only the commander can do: the server, its bot, the invite."] },
+  { s: "now", when: "Next", title: "The 0.5 release gates", fx: "bombs",
+    imgs: [["carpet_street", G, "The long checks before a release are a bombardment of their own."]],
+    lines: ["The full test pass that the fast lane skipped.", "Multiplayer with the new nations, on one PC and then online.", "A release-type tester build on an itch.io restricted page."],
+    more: ["Then merge the Pacific line into the 0.5 line."] },
+  { s: "ahead", when: "Ahead", title: "On Steam: store page and free demo", fx: "flare",
+    imgs: [["thumb", G, "The features teaser's thumbnail: the start of a store page."]],
+    lines: ["A Steam store page, so the full game can be wishlisted.", "The free demo on Steam, beside the one on itch.io.", "Open playtests of the real game through Steam Playtest, all on the same platform."] },
+  { s: "ahead", when: "Ahead", title: "Guns that recoil right", fx: "tanks",
+    imgs: [["c_turan", C, "Concept picture: a barrel that should slide back on its own."]],
+    lines: ["The barrel becomes its own part, so recoil moves the barrel and not the whole gun.", "Two anti-aircraft guns are paused mid-fix.", "Own models for the 89 types that borrow one today."] },
+  { s: "ahead", when: "Ahead", title: "Romania, China, France", fx: "tanks",
+    imgs: [["c_rom_r2", C, "Concept picture of the Romanian R-2 tank."]],
+    lines: ["The next three nations: soldiers and first vehicles exist as concept pictures.", "Their families of weapons and vehicles are planned.", "Waits for model credits."] },
+  { s: "ahead", when: "Ahead", title: "Warships", fx: "naval",
+    imgs: [["c_destroyer", C, "Concept picture of a Fletcher-class destroyer."], ["c_torpedo_boat", C, "Concept picture of an S-boat."], ["c_monitor", C, "Concept picture of a Danube monitor."]],
+    lines: ["Gunfire from the sea and batteries on the shore.", "Gunboats and torpedo boats you steer; destroyers; aircraft against ships.", "23 ship models are already built and waiting."],
+    more: ["No submarines: decided on 31 October."] },
+  { s: "ahead", when: "Ahead", title: "The landing", fx: "naval",
+    imgs: [["c_landing", C, "Concept picture of a landing craft on a Pacific beach."]],
+    lines: ["A real landing craft model in place of today's blue box.", "A Landing mode: take a defended beach from the sea."] },
+  { s: "ahead", when: "Ahead", title: "North Africa", fx: "tanks", imgs: [],
+    lines: ["The desert theatre of the accepted design, with its own ground, buildings and names.", "Nothing is built and nothing is drawn yet."] },
+  { s: "ahead", when: "Ahead", title: "Places with names", fx: "guns",
+    imgs: [["c_village_square", C, "Concept picture of a village square."]],
+    lines: ["Hamlets, farms, villages, towns with industry and harbours.", "Every place gets a name of its own country instead of West Farm and East Church."] },
+  { s: "ahead", when: "Ahead", title: "Inside the buildings, stage two", fx: "fire",
+    imgs: [["c_interior", C, "Concept picture: a village under fire with houses torn open."], ["c_fire_house", C, "Concept picture: a burning house being stormed."]],
+    lines: ["Furniture as cover, stairs that can be held, grenades down the stairwell.", "Sheds and garages for one or two men.", "Schools, factories and churches as complexes of several buildings."] },
+  { s: "ahead", when: "Ahead", title: "Battle damage that stays", fx: "bombs",
+    imgs: [["c_ruins", C, "Concept picture of a bombed village."]],
+    lines: ["Ruins, rubble, wrecks and fires that remain on the field after the fight."] },
+  { s: "ahead", when: "Ahead", title: "Defence positions in one click", fx: "guns",
+    imgs: [["build_ghost", G, "Today every work is placed one at a time."]],
+    lines: ["Several defensive works saved as one template.", "Placed with a single order, built by the engineers."] },
+  { s: "ahead", when: "Far objective", title: "The world campaign", fx: "bombs", imgs: [],
+    lines: ["One seamless world that keeps moving while you fight a battle.", "Subordinate commanders fight the battles you skip.", "Resources move across the map; surviving units go back into the pool.", "Four to eight hours, alone or in co-op against the AI."] },
+  { s: "ahead", when: "Far objective", title: "The big launch", fx: "flare",
+    imgs: [["paratroopers", G, "Paratroopers over a river town: the drop before the big day."]],
+    lines: ["Steam Next Fest with the demo, to gather the wishlists.", "Then the launch of the full game on Steam."] },
+];
+const LABEL = { done: "Taken", now: "Under attack", ahead: "Objective" };
+const KIND = { game: "In game", concept: "Concept" };
+
+/* ---------------------------------------------------------------- the sheet */
+const tl = document.getElementById("tl"), scout = document.getElementById("scout");
+const pad = n => String(n).padStart(2, "0");
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+let frontDrawn = false;
+STEPS.forEach((st, i) => {
+  if (st.s !== "done" && !frontDrawn) {
+    frontDrawn = true;
+    const f = document.createElement("div");
+    f.className = "front"; f.id = "front";
+    f.innerHTML = "<span>The front line today</span>";
+    tl.appendChild(f);
+  }
+  const el = document.createElement("article");
+  el.className = "step s-" + st.s; el.dataset.s = st.s; el.dataset.i = i;
+  const im = st.imgs[0];
+  el.innerHTML =
+    '<div class="card">' +
+      '<div class="shot">' + (im
+        ? '<img src="img/' + im[0] + '.jpg" width="720" height="405" loading="' + (i < 3 ? "eager" : "lazy") + '" alt="' + esc(im[2]) + '"><span class="kind ' + im[1] + '">' + KIND[im[1]] + "</span>"
+        : '<div class="none">No picture yet<br>not drawn, not built</div>') + "</div>" +
+      '<div class="txt"><div class="row"><span class="when">' + esc(st.when) + '</span><span class="stamp">' + LABEL[st.s] + "</span></div>" +
+      "<h3>" + esc(st.title) + "</h3><ul>" + st.lines.map(l => "<li>" + esc(l) + "</li>").join("") + "</ul>" +
+      '<button class="open" type="button" id="open-' + i + '">Dossier ' + pad(i + 1) + "</button></div>" +
+    "</div>" +
+    '<div class="pin" aria-hidden="true">' + pad(i + 1) + "</div>";
+  tl.appendChild(el);
+});
+const steps = [...tl.querySelectorAll(".step")];
+
+const n = { done: 0, now: 0, ahead: 0 };
+STEPS.forEach(s => n[s.s]++);
+document.getElementById("tally").innerHTML =
+  '<div class="t-done"><b>' + n.done + "</b><span>objectives taken</span></div>" +
+  '<div class="t-now"><b>' + n.now + "</b><span>under attack</span></div>" +
+  '<div class="t-ahead"><b>' + n.ahead + "</b><span>ahead</span></div>";
+document.getElementById("bar").innerHTML =
+  '<i class="b-done" style="width:' + (100 * n.done / STEPS.length) + '%"></i><i class="b-now" style="width:' + (100 * n.now / STEPS.length) + '%"></i><i class="b-ahead" style="width:' + (100 * n.ahead / STEPS.length) + '%"></i>';
+
+function layout() {           /* how far the solid route reaches, and where the scout waits */
+  const front = document.getElementById("front");
+  if (front && !front.hidden) tl.style.setProperty("--reach", (front.offsetTop + front.offsetHeight / 2) + "px");
+  else tl.style.setProperty("--reach", steps.some(s => !s.hidden && s.dataset.s === "done") ? "100%" : "0px");
+  if (!live) park();
+}
+function park() {
+  const home = steps.find(s => !s.hidden && s.dataset.s === "now") || steps.find(s => !s.hidden);
+  if (home) scout.style.top = (home.offsetTop - 40) + "px";
+  scout.classList.remove("rolling");
+}
+document.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b ? "true" : "false"));
+  const f = b.dataset.f;
+  steps.forEach(s => { s.hidden = !(f === "all" || s.dataset.s === f); });
+  const front = document.getElementById("front");
+  if (front) front.hidden = f !== "all";
+  layout();
+}));
+addEventListener("resize", layout);
+addEventListener("load", layout);
+
+/* ---------------------------------------------------------------- the dossier */
+const dlg = document.getElementById("dossier"), dz = document.getElementById("dz");
+function openDossier(i) {
+  const st = STEPS[i];
+  disengage();
+  dz.innerHTML =
+    '<header><div><div class="eyebrow">Objective ' + pad(i + 1) + " &middot; " + LABEL[st.s] + " &middot; " + esc(st.when) + '</div><h2 id="dz-title">' + esc(st.title) + "</h2></div>" +
+    '<button class="x" type="button" id="dz-close">Close</button></header>' +
+    (st.imgs.length ? '<div class="pics">' + st.imgs.map(m => '<figure><img src="img/' + m[0] + '.jpg" width="720" height="405" alt=""><figcaption>' + KIND[m[1]].toUpperCase() + " &middot; " + esc(m[2]) + "</figcaption></figure>").join("") + "</div>" : "") +
+    "<h4>" + (st.s === "done" ? "What was taken" : st.s === "now" ? "What is being done" : "What is planned") + "</h4><ul>" + st.lines.map(l => "<li>" + esc(l) + "</li>").join("") + "</ul>" +
+    (st.more ? "<h4>Still open</h4><ul>" + st.more.map(l => "<li>" + esc(l) + "</li>").join("") + "</ul>" : "");
+  document.getElementById("dz-close").addEventListener("click", () => dlg.close());
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+}
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+tl.addEventListener("click", e => { const b = e.target.closest(".open"); if (b) openDossier(+b.closest(".step").dataset.i); });
+
+/* ---------------------------------------------------------------- fire */
+const cv = document.getElementById("fx"), c = cv.getContext("2d");
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let W = 0, H = 0, P = [], live = null, raf = 0, last = 0, timers = [], touchOff = 0;
+const R = (a, b) => a + Math.random() * (b - a), pick = a => a[Math.random() * a.length | 0];
+const SMOKE = ["#8d8a76", "#a6a28c", "#77755f", "#bdb8a0"], FIRE = ["#ffd24a", "#ff9a2e", "#f0641e", "#c93a16"], DUST = ["#b79a6a", "#a3875a", "#c9ad7d"], WATER = ["#e9f4f8", "#bfe0ee", "#8cc2dd"];
+function size() { const d = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * d; cv.height = H * d; c.setTransform(d, 0, 0, d, 0, 0); }
+size(); addEventListener("resize", size);
+const later = (ms, f) => timers.push(setTimeout(f, ms));
+const every = (ms, f) => { f(); timers.push(setInterval(f, ms)); };
+function puff(x, y, o = {}) { P.push({ k: "puff", x, y, vx: o.vx ?? R(-14, 14), vy: o.vy ?? R(-34, -10), g: o.g ?? 0, r: o.r ?? R(6, 13), gr: o.gr ?? R(8, 18), t: 0, life: o.life ?? R(.9, 1.7), col: o.col || pick(SMOKE) }); }
+function cloud(x, y, nn, o = {}) { for (let i = 0; i < nn; i++) puff(x + R(-o.w || -10, o.w || 10), y + R(-6, 6), o); }
+function boom(x, y, s = 1) {
+  P.push({ k: "flash", x, y, r: 30 * s, t: 0, life: .14 }, { k: "ring", x, y, r: 8 * s, t: 0, life: .4, s });
+  for (let i = 0; i < 9; i++) puff(x + R(-8, 8) * s, y + R(-8, 8) * s, { col: pick(FIRE), r: R(7, 13) * s, gr: R(26, 46) * s, life: R(.3, .55), vx: R(-60, 60) * s, vy: R(-80, 20) * s });
+  for (let i = 0; i < 10; i++) P.push({ k: "bit", x, y, vx: R(-190, 190) * s, vy: R(-260, -60) * s, t: 0, life: R(.6, 1.1), a: R(0, 6), w: R(3, 7) * s });
+  later(90, () => { for (let i = 0; i < 9; i++) puff(x + R(-14, 14) * s, y + R(-12, 4) * s, { r: R(9, 15) * s, gr: R(12, 22) * s, life: R(1.2, 2.2), vy: R(-46, -18) }); });
+  if (live) { live.classList.remove("hit"); void live.offsetWidth; live.classList.add("hit"); later(240, () => live && live.classList.remove("hit")); }
+}
+function tracer(x, y, tx, ty, col) { P.push({ k: "tr", x, y, tx, ty, t: 0, life: 9, col: col || "#ffd34d" }); P.push({ k: "muz", x, y, a: Math.atan2(ty - y, tx - x), t: 0, life: .09 }); }
+function burst(x, y, tx, ty, nn, col) { for (let i = 0; i < nn; i++) later(i * 70, () => tracer(x + R(-2, 2), y + R(-2, 2), tx + R(-18, 18), ty + R(-18, 18), col)); }
+function bomb(x, y, ty, vx) { P.push({ k: "bomb", x, y, ty, vx: vx || 0, vy: 120, t: 0, life: 9 }); }
+function plane(y, dir, drop) { P.push({ k: "plane", x: dir > 0 ? -90 : W + 90, y, vx: dir * 430, dir, t: 0, life: 9, drop, next: 0 }); }
+function chute(x, y, ty) { P.push({ k: "chute", x, y, ty, ph: R(0, 6), t: 0, life: 30 }); }
+function bolt(x, y0, y1) { const pts = [[x, y0]]; let px = x; for (let y = y0; y < y1; y += R(18, 34)) { px += R(-22, 22); pts.push([px, y]); } P.push({ k: "bolt", pts, t: 0, life: .2 }, { k: "sky", t: 0, life: .16 }); }
+function star(x, y, col) { for (let i = 0; i < 14; i++) { const a = i / 14 * 6.283; P.push({ k: "spark", x, y, vx: Math.cos(a) * R(60, 130), vy: Math.sin(a) * R(60, 130), t: 0, life: R(.7, 1.2), col }); } }
+
+let lastEl = null;            /* a plane already in the air still needs its target after you look away */
+const box = () => (live || lastEl).getBoundingClientRect();
+const SCENES = {
+  guns() { every(520, () => { const r = box(), l = Math.random() < .5; const y = R(r.top + 10, r.bottom - 10), ty = R(r.top, r.bottom);
+      burst(l ? r.left - 46 : r.right + 46, y, l ? r.right + 30 : r.left - 30, ty, 4 + (Math.random() * 3 | 0), l ? "#ffd34d" : "#ff7a55");
+      later(330, () => live && cloud(l ? r.right + 26 : r.left - 26, ty, 3, { col: pick(DUST), r: 5, life: .7 })); });
+    every(1700, () => { const r = box(); boom(R(r.left, r.right), Math.random() < .5 ? r.top - 14 : r.bottom + 14, .6); }); },
+  tanks() { every(1300, () => { const r = box(), l = Math.random() < .5, y = R(r.top + 30, r.bottom - 30), x0 = l ? r.left - 60 : r.right + 60, x1 = l ? r.right + 40 : r.left - 40;
+      tracer(x0, y, x1, y + R(-30, 30), "#fff0b0"); cloud(x0, y, 6, { col: pick(SMOKE), r: 9, gr: 30, life: .9, vx: l ? -40 : 40, vy: -10 });
+      later(230, () => live && boom(x1, y + R(-20, 20), 1)); });
+    every(240, () => { const r = box(); puff(R(r.left, r.right), r.bottom + 8, { col: pick(DUST), r: R(5, 9), life: R(.6, 1.1), vy: R(-22, -6) }); }); },
+  bombs() { every(2300, () => { const r = box(), d = Math.random() < .5 ? 1 : -1; plane(Math.max(34, r.top - R(90, 150)), d, { x0: r.left - 10, x1: r.right + 10, ty: () => R(box().top - 8, box().top + 26) }); });
+    later(500, () => live && every(900, () => { const r = box(); puff(R(r.left, r.right), r.top, { r: R(8, 13), life: 2 }); })); },
+  fire() { every(120, () => { const r = box(), x = R(r.left + 20, r.right - 20); puff(x, r.top + 6, { col: pick(FIRE), r: R(5, 10), gr: R(10, 20), life: R(.4, .8), vx: R(-10, 10), vy: R(-90, -50) }); if (Math.random() < .35) puff(x, r.top - 20, { r: R(8, 13), life: R(1.4, 2.4), vy: R(-50, -26) }); });
+    every(1500, () => { const r = box(); burst(r.left - 40, R(r.top, r.bottom), r.left + 30, R(r.top, r.bottom), 4); later(600, () => live && boom(R(r.left, r.right), r.bottom + 10, .5)); }); },
+  naval() { every(700, () => { const r = box(), x = R(r.left - 30, r.right + 30); for (let i = 0; i < 7; i++) puff(x + R(-8, 8), r.bottom + 12, { col: pick(WATER), r: R(4, 8), gr: 10, life: R(.6, 1), vx: R(-26, 26), vy: R(-210, -110), g: 420 }); });
+    every(1900, () => { const r = box(), l = Math.random() < .5, x0 = l ? -30 : W + 30, y0 = R(r.top, r.bottom); tracer(x0, y0, l ? r.left - 10 : r.right + 10, R(r.top + 20, r.bottom - 20), "#fff0b0"); later(Math.abs((l ? r.left : r.right) - x0) / 1.1, () => live && boom(l ? box().left - 10 : box().right + 10, R(box().top + 20, box().bottom - 20), .9)); }); },
+  paras() { every(620, () => { const r = box(); chute(R(r.left + 20, r.right - 20), Math.max(-20, r.top - R(200, 300)), r.top + R(-6, 40)); });
+    every(900, () => { const r = box(), x = R(r.left - 40, r.right + 40), y = Math.max(20, r.top - R(60, 220)); P.push({ k: "flash", x, y, r: 12, t: 0, life: .08 }); cloud(x, y, 5, { col: "#4a4a40", r: 6, gr: 12, life: 1.3, vy: -4, vx: 0 }); });
+    every(1400, () => { const r = box(); burst(R(r.left, r.right), r.bottom + 30, R(r.left, r.right), r.top - 160, 5, "#ffd34d"); }); },
+  storm() { every(1500, () => { const r = box(); bolt(R(r.left, r.right), 0, r.top + R(0, 40)); later(120, () => live && boom(R(box().left, box().right), box().top, .4)); });
+    every(40, () => { const r = box(); for (let i = 0; i < 3; i++) P.push({ k: "rain", x: R(r.left - 60, r.right + 80), y: r.top - R(40, 260), t: 0, life: .7 }); }); },
+  train() { every(260, () => { const r = box(), u = (performance.now() / 2600) % 1, x = r.left - 40 + u * (r.width + 80); puff(x, r.bottom + 10, { col: "#e9e4d2", r: R(6, 10), gr: 16, life: 1.5, vx: -30, vy: -40 }); puff(x + 10, r.bottom + 16, { col: pick(DUST), r: 4, life: .5, vy: -6 }); });
+    every(2100, () => { const r = box(); burst(r.right + 50, r.top + 20, r.left + 40, r.bottom + 10, 5, "#ff7a55"); }); },
+  flare() { every(800, () => { const r = box(), x = R(r.left, r.right), col = pick(["#7be07b", "#ff6a5a", "#ffe07a"]); P.push({ k: "rocket", x, y: r.bottom + 10, ty: Math.max(30, r.top - R(40, 160)), col, t: 0, life: 9 }); }); },
+};
+function engage(el) {
+  if (still || live === el) return;
+  disengage();
+  live = el; el.classList.add("live");
+  lastEl = el;
+  scout.style.top = (el.offsetTop - 40) + "px"; scout.classList.add("rolling"); later(720, () => scout.classList.remove("rolling"));
+  (SCENES[STEPS[+el.dataset.i].fx] || SCENES.guns)();
+  if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+}
+function disengage() {
+  timers.forEach(t => { clearTimeout(t); clearInterval(t); }); timers = [];
+  if (live) { live.classList.remove("live", "hit"); live = null; park(); }
+}
+steps.forEach(el => {
+  el.querySelector(".card").addEventListener("pointerenter", e => { if (e.pointerType !== "touch") engage(el); });
+  el.querySelector(".card").addEventListener("pointerleave", e => { if (e.pointerType !== "touch") disengage(); });
+  el.querySelector(".card").addEventListener("pointerdown", e => { if (e.pointerType === "touch") { engage(el); clearTimeout(touchOff); touchOff = setTimeout(disengage, 4500); } });
+  el.querySelector(".open").addEventListener("focus", e => { if (e.target.matches(":focus-visible")) engage(el); });
+  el.querySelector(".open").addEventListener("blur", disengage);
+});
+dlg.addEventListener("close", disengage);
+document.addEventListener("visibilitychange", () => { if (document.hidden) disengage(); });
+
+function blob(x, y, r, col, a) {           /* a flat-shaded ball with a lit side, like the game's smoke */
+  c.globalAlpha = a; c.fillStyle = col; c.beginPath(); c.arc(x, y, r, 0, 6.283); c.fill();
+  c.globalAlpha = a * .35; c.fillStyle = "#fff"; c.beginPath(); c.arc(x - r * .28, y - r * .3, r * .55, 0, 6.283); c.fill();
+}
+function tick(now) {
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  c.clearRect(0, 0, W, H);
+  if (P.length > 520) P.splice(0, P.length - 520);
+  for (let i = P.length - 1; i >= 0; i--) {
+    const p = P[i]; p.t += dt; const u = p.t / p.life;
+    if (u >= 1) { P.splice(i, 1); continue; }
+    switch (p.k) {
+      case "puff": p.vy += p.g * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.gr * dt; blob(p.x, p.y, p.r, p.col, Math.min(1, (1 - u) * 1.6) * .92); break;
+      case "flash": c.globalAlpha = 1 - u; c.fillStyle = "#fff6c8"; c.beginPath(); c.arc(p.x, p.y, p.r * (.6 + u), 0, 6.283); c.fill(); break;
+      case "ring": c.globalAlpha = (1 - u) * .7; c.strokeStyle = "#fff6c8"; c.lineWidth = 3; c.beginPath(); c.arc(p.x, p.y, p.r + u * 60 * p.s, 0, 6.283); c.stroke(); break;
+      case "bit": p.vy += 620 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.a += 9 * dt; c.globalAlpha = 1 - u * u; c.fillStyle = "#2a2a20"; c.save(); c.translate(p.x, p.y); c.rotate(p.a); c.fillRect(-p.w / 2, -p.w / 2, p.w, p.w); c.restore(); break;
+      case "tr": { const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy), stepLen = 1150 * dt;
+        if (d <= stepLen) { P.splice(i, 1); P.push({ k: "flash", x: p.tx, y: p.ty, r: 7, t: 0, life: .07 }); if (Math.random() < .5) puff(p.tx, p.ty, { col: pick(DUST), r: 3, gr: 10, life: .5 }); break; }
+        const ux = dx / d, uy = dy / d; p.x += ux * stepLen; p.y += uy * stepLen;
+        c.globalAlpha = 1; c.strokeStyle = p.col; c.lineWidth = 2.6; c.lineCap = "round"; c.beginPath(); c.moveTo(p.x - ux * 30, p.y - uy * 30); c.lineTo(p.x, p.y); c.stroke();
+        c.strokeStyle = "#fff"; c.lineWidth = 1; c.beginPath(); c.moveTo(p.x - ux * 12, p.y - uy * 12); c.lineTo(p.x, p.y); c.stroke(); break; }
+      case "muz": c.globalAlpha = 1 - u; c.fillStyle = "#ffe9a0"; c.save(); c.translate(p.x, p.y); c.rotate(p.a); c.beginPath(); c.moveTo(0, -5); c.lineTo(26, 0); c.lineTo(0, 5); c.lineTo(-5, 0); c.fill(); c.restore(); break;
+      case "bomb": p.vy += 520 * dt; p.x += p.vx * dt; p.y += p.vy * dt;
+        if (p.y >= p.ty) { P.splice(i, 1); boom(p.x, p.ty, 1); break; }
+        c.globalAlpha = 1; c.save(); c.translate(p.x, p.y); c.rotate(Math.atan2(p.vy, p.vx) - 1.5708); c.fillStyle = "#23261a"; c.beginPath(); c.ellipse(0, 0, 3.4, 8, 0, 0, 6.283); c.fill(); c.fillRect(-4, -11, 8, 4); c.restore(); break;
+      case "plane": p.x += p.vx * dt;
+        if (p.drop && p.x > p.drop.x0 && p.x < p.drop.x1 && p.t > p.next) { p.next = p.t + .13; bomb(p.x, p.y + 8, p.drop.ty(), p.vx * .06); }
+        if (p.x < -120 || p.x > W + 120) { P.splice(i, 1); break; }
+        c.globalAlpha = 1; c.save(); c.translate(p.x, p.y); c.scale(p.dir, 1); c.fillStyle = "#2c3324";
+        c.beginPath(); c.ellipse(0, 0, 30, 5, 0, 0, 6.283); c.fill(); c.fillRect(-6, -30, 13, 60); c.fillRect(-28, -11, 7, 22);
+        c.fillStyle = "rgba(255,255,255,.35)"; c.fillRect(31, -11, 2, 22); c.restore(); break;
+      case "chute": { p.y += 54 * dt; const sx = p.x + Math.sin(p.t * 2.2 + p.ph) * 9;
+        if (p.y >= p.ty) { P.splice(i, 1); cloud(sx, p.ty + 16, 4, { col: pick(DUST), r: 4, life: .6, vy: -8 }); break; }
+        c.globalAlpha = 1; c.strokeStyle = "#8d8a76"; c.lineWidth = 1;
+        for (let k = -2; k <= 2; k++) { c.beginPath(); c.moveTo(sx + k * 10, p.y); c.lineTo(sx, p.y + 34); c.stroke(); }
+        for (let k = 0; k < 4; k++) { c.fillStyle = k % 2 ? "#cfc8ac" : "#8f9a6a"; c.beginPath(); c.moveTo(sx, p.y); c.arc(sx, p.y, 23, Math.PI + k * Math.PI / 4, Math.PI + (k + 1) * Math.PI / 4); c.closePath(); c.fill(); }
+        c.strokeStyle = "#3a3f2c"; c.lineWidth = 1.5; c.beginPath(); c.arc(sx, p.y, 23, Math.PI, 2 * Math.PI); c.closePath(); c.stroke();
+        c.fillStyle = "#3a3f2c"; c.fillRect(sx - 3.5, p.y + 33, 7, 13); c.beginPath(); c.arc(sx, p.y + 30.5, 3.8, 0, 6.283); c.fill(); break; }
+      case "bolt": c.globalAlpha = 1 - u; c.strokeStyle = "#fffbe0"; c.lineWidth = 3; c.lineJoin = "round"; c.beginPath(); p.pts.forEach((q, j) => j ? c.lineTo(q[0], q[1]) : c.moveTo(q[0], q[1])); c.stroke();
+        c.strokeStyle = "#9fd0ff"; c.lineWidth = 7; c.globalAlpha = (1 - u) * .3; c.stroke(); break;
+      case "sky": c.globalAlpha = (1 - u) * .2; c.fillStyle = "#eaf4ff"; c.fillRect(0, 0, W, H); break;
+      case "rain": p.x -= 90 * dt; p.y += 620 * dt; c.globalAlpha = .5 * (1 - u); c.strokeStyle = "#9fc6dc"; c.lineWidth = 1.4; c.beginPath(); c.moveTo(p.x, p.y); c.lineTo(p.x + 3, p.y - 15); c.stroke(); break;
+      case "rocket": p.y -= 330 * dt; p.x += Math.sin(p.t * 9) * 12 * dt;
+        if (p.y <= p.ty) { P.splice(i, 1); star(p.x, p.y, p.col); P.push({ k: "flash", x: p.x, y: p.y, r: 16, t: 0, life: .12 }); break; }
+        c.globalAlpha = 1; c.fillStyle = p.col; c.beginPath(); c.arc(p.x, p.y, 3, 0, 6.283); c.fill(); if (Math.random() < .6) puff(p.x, p.y + 6, { r: 2.5, gr: 5, life: .5, vy: 10, vx: 0 }); break;
+      case "spark": p.vy += 90 * dt; p.vx *= .985; p.x += p.vx * dt; p.y += p.vy * dt; c.globalAlpha = 1 - u; c.fillStyle = p.col; c.beginPath(); c.arc(p.x, p.y, 2.4, 0, 6.283); c.fill(); break;
+    }
+  }
+  c.globalAlpha = 1;
+  if (P.length || live) raf = requestAnimationFrame(tick); else { raf = 0; c.clearRect(0, 0, W, H); }
+}
+layout();
+</script>
+</main>
+<footer class="site-foot">
+  <div class="site-wrap">
+    <div class="cols">
+      <a class="brand" href="../">FRONTS <span>1944</span></a>
+      <ul>
+        <li><a href="https://comeandgetsome.itch.io/fronts-1944">Play the free demo on itch.io</a></li>
+        <li>Steam page: coming soon</li>
+      </ul>
+      <ul>
+        <li><a href="../roadmap/">Roadmap</a></li>
+        <li><a href="../devlog/">Devlog</a></li>
+      </ul>
+    </div>
+    <p class="fine">FRONTS 1944 is made by one developer in Hungary. Pictures marked <i>Concept</i> are generated targets for the look and are not the game; every other picture is the game's own frame.</p>
+    <p class="fine">&copy; 2026 FRONTS 1944</p>
+  </div>
+</footer>
+</body>
+</html>

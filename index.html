@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FRONTS 1944 – WW2 real-time strategy</title>
+<meta name="description" content="FRONTS 1944 is a WW2 real-time strategy game: hold the towns, dig in, run the trains, call the bombers. Seven nations, house-to-house fighting, weather, team battles online. Free demo on itch.io.">
+<link rel="canonical" href="https://fronts1944.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FRONTS 1944">
+<meta property="og:description" content="A WW2 real-time strategy game: hold the towns, dig in, run the trains, call the bombers.">
+<meta property="og:url" content="https://fronts1944.com/">
+<meta property="og:image" content="https://fronts1944.com/assets/img/social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&family=Saira+Stencil+One&family=Special+Elite&display=swap">
+<link rel="stylesheet" href="assets/chrome.css">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* ---- the hero: one of the game's own frames, full width */
+.hero { position: relative; min-height: min(92vh, 860px); display: grid; align-items: end; color: var(--night-ink); background: var(--night); overflow: hidden; }
+.hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; animation: drift 26s ease-in-out infinite alternate; }
+.hero::after { content: ""; position: absolute; inset: 0; background:
+  linear-gradient(to top, rgba(18, 20, 12, .95) 0%, rgba(18, 20, 12, .72) 34%, rgba(18, 20, 12, .12) 70%, rgba(18, 20, 12, .3) 100%); }
+.hero .wrap { position: relative; z-index: 1; width: 100%; padding-top: 120px; padding-bottom: 56px; }
+.hero .eyebrow { color: #cfc8ac; }
+.hero h1 { font-size: clamp(64px, 14vw, 156px); line-height: .9; margin: 8px 0 10px; color: var(--brass); text-shadow: 4px 5px 0 rgba(0, 0, 0, .55); }
+.hero .tag { font: 600 clamp(20px, 2.6vw, 27px)/1.3 var(--body); max-width: 40ch; margin: 0 0 26px; text-wrap: balance; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.hero .note { font: 400 13px/1.4 var(--type); letter-spacing: .05em; color: #cfc8ac; margin: 16px 0 0; }
+@keyframes drift { from { transform: scale(1.02); } to { transform: scale(1.1) translate(-1.5%, -1%); } }
+@media (prefers-reduced-motion: reduce) { .hero img.bg { animation: none; } }
+
+/* ---- the trailer band */
+.reel { background: var(--night); color: var(--night-ink); padding: 56px 0 64px; border-top: 3px solid var(--brass); }
+.reel h2 { color: var(--brass); }
+.reel .frame { border: 3px solid var(--night-ink); box-shadow: 10px 12px 0 rgba(0, 0, 0, .5); background: #000; }
+.reel video { width: 100%; aspect-ratio: 16 / 9; height: auto; }
+.reel .cap { font: 400 13px/1.4 var(--type); color: #aba68b; margin: 14px 0 0; letter-spacing: .04em; }
+
+/* ---- command: a wide dossier */
+.dossier { display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; align-items: center; margin-top: 28px; }
+.dossier .card { --tilt: -.35deg; }
+.dossier ul { margin: 0; padding-left: 20px; display: grid; gap: 10px; }
+.dossier li::marker { color: var(--olive); }
+.dossier li b { font-weight: 700; }
+@media (max-width: 860px) { .dossier { grid-template-columns: 1fr; } }
+
+/* ---- modes */
+.modes { display: grid; gap: 0; grid-template-columns: repeat(4, 1fr); margin-top: 26px; border: 2px solid var(--ink); background: var(--card); box-shadow: 5px 6px 0 var(--shade); }
+@media (max-width: 900px) { .modes { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .modes { grid-template-columns: 1fr; } }
+.modes > div { padding: 18px 18px 20px; border: 1px solid color-mix(in srgb, var(--ink) 35%, transparent); }
+.modes .n { font: 400 30px/1 var(--display); color: var(--own); }
+.modes h3 { font-size: 21px; margin: 6px 0 6px; }
+.modes p { margin: 0; color: var(--ink-soft); font-size: 17px; }
+
+/* ---- the roadmap teaser */
+.front { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+.tally { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 18px 0 12px; align-items: baseline; }
+.tally b { font: 400 40px/1 var(--display); margin-right: 8px; font-variant-numeric: tabular-nums; }
+.tally span { font: 400 13px/1 var(--type); letter-spacing: .08em; text-transform: uppercase; }
+.tally .t-done b { color: var(--taken); } .tally .t-now b { color: var(--foe); } .tally .t-ahead b { color: var(--own); }
+.bar { display: flex; height: 14px; border: 2px solid var(--ink); background: var(--paper-deep); margin-bottom: 22px; }
+.bar i { display: block; height: 100%; }
+.bar .b-done { background: var(--taken); } .bar .b-now { background: var(--foe); }
+.bar .b-ahead { background: repeating-linear-gradient(135deg, var(--own) 0 6px, transparent 6px 12px); }
+.next { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.next li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: baseline; }
+.next li::before { content: ""; width: 14px; height: 14px; border-radius: 50%; border: 3px solid var(--own); transform: translateY(2px); }
+.next li.now::before { background: var(--foe); border-color: var(--foe); }
+@media (max-width: 860px) { .front { grid-template-columns: 1fr; } }
+
+/* ---- devlog list */
+.posts { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); margin-top: 26px; }
+.posts a.card { text-decoration: none; color: inherit; display: block; }
+.posts .when { font: 400 13px/1 var(--type); letter-spacing: .08em; color: var(--ink-soft); }
+
+/* ---- last call */
+.last { text-align: center; }
+.last .ctas { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 22px; }
+.last .btn:not(.primary) { color: var(--ink); }
+</style>
+</head>
+<body>
+<!--TOP-->
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-top">
+  <div class="site-wrap">
+    <a class="brand" href="./">FRONTS <span>1944</span></a>
+    <nav class="nav" aria-label="Site">
+      <a href="#game" class="wide">The game</a>
+      <a href="roadmap/">Roadmap</a>
+      <a href="devlog/">Devlog</a>
+      <a href="https://comeandgetsome.itch.io/fronts-1944" class="play">Play</a>
+    </nav>
+  </div>
+</header>
+<!--/TOP-->
+
+<main id="main">
+<section class="hero">
+  <img class="bg" src="assets/img/paratroopers-lg.jpg" srcset="assets/img/paratroopers-md.jpg 800w, assets/img/paratroopers-lg.jpg 1600w" sizes="100vw" width="1600" height="900" alt="Paratroopers under panelled canopies come down over a river town." fetchpriority="high">
+  <div class="wrap">
+    <div class="eyebrow">WW2 real-time strategy &middot; in development</div>
+    <h1>FRONTS 1944</h1>
+    <p class="tag">Hold the towns, dig in, run the trains, call the bombers, answer the telegrams.</p>
+    <div class="ctas">
+      <a class="btn primary" href="https://comeandgetsome.itch.io/fronts-1944">Play the free demo</a>
+      <span class="btn" aria-disabled="true">Wishlist on Steam <small>coming soon</small></span>
+    </div>
+    <p class="note">Browser demo and Windows download on itch.io. Pictures are the game's own frames unless marked Concept.</p>
+  </div>
+</section>
+
+<section class="reel" aria-labelledby="reel-h">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#aba68b">Teaser &middot; three new nations</div>
+    <h2 id="reel-h">Japan, Italy, Hungary</h2>
+    <div class="frame">
+      <video controls preload="none" playsinline poster="assets/img/teaser-poster.jpg" width="1280" height="720">
+        <source src="assets/video/teaser.mp4" type="video/mp4">
+        Your browser cannot play this video. <a href="assets/video/teaser.mp4">Download the teaser</a>.
+      </video>
+    </div>
+    <p class="cap">56 seconds, in-game footage. Music: "Machina Bellum", from the game's soundtrack.</p>
+  </div>
+</section>
+
+<section class="band" id="game" aria-labelledby="game-h">
+  <div class="wrap">
+    <div class="eyebrow">The war on one table</div>
+    <h2 id="game-h">Every arm of the fight, under your hand</h2>
+    <p class="lede">FRONTS 1944 puts infantry, armour, artillery, engineers, trains and aircraft on one generated battlefield. Every map is new: villages, rivers, railways, airfields, weather and seasons.</p>
+    <p class="lede" style="margin-top:10px;font-size:16px">What you see here is the current development build. The free demo on itch.io is an earlier version; the next public release brings it up to date.</p>
+    <div class="grid3">
+      <article class="card">
+        <div class="shot"><img src="assets/img/carpet_street-md.jpg" width="800" height="450" loading="lazy" alt="A carpet raid comes down a village street."></div>
+        <div class="txt"><h3>Call the bombers</h3><p>Draw a strip and the heavy bombers fly it. Fighters fight for the sky, transports drop paratroopers where you aim, and storms keep them all on the ground.</p></div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="assets/img/house_bunker-md.jpg" width="800" height="450" loading="lazy" alt="A house fortified level by level, soldiers at its foot."></div>
+        <div class="txt"><h3>House to house</h3><p>Roofs open where you need to look in. Rooms, doors, grenades and smoke, and engineers who turn a farmhouse into a bunker.</p></div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="assets/img/train-md.jpg" width="800" height="450" loading="lazy" alt="A supply train runs past a town fight."></div>
+        <div class="txt"><h3>Run the trains</h3><p>Supply trains, stations, depots and trucks carry the ammunition forward. Blow a bridge and the other side waits for its repair crews.</p></div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="assets/img/lightning-md.jpg" width="800" height="450" loading="lazy" alt="Lightning over a dug-in line in the rain."></div>
+        <div class="txt"><h3>Weather and seasons</h3><p>Rain, snow, night and thunderstorms change what you can see, what can fly and how fast the line can move.</p></div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="assets/img/zrinyi-md.jpg" width="800" height="450" loading="lazy" alt="A Hungarian Zrinyi II assault gun fires its 105 mm."></div>
+        <div class="txt"><h3>Seven nations</h3><p>Japan, Italy and Hungary joined in November, each with its own soldiers, AI and an arsenal of historic weapons, vehicles, guns and aircraft.</p></div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="assets/img/lagoon-md.jpg" width="800" height="450" loading="lazy" alt="A Pacific lagoon with a coral causeway and a half-track."></div>
+        <div class="txt"><h3>Coasts and the Pacific</h3><p>Islands with lagoons, jungle, swamps and caves. Swimming tanks and landing craft, ordered from a Navy board.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="cmd-h">
+  <div class="wrap">
+    <div class="eyebrow">Field headquarters</div>
+    <h2 id="cmd-h">Orders are stamps on the map</h2>
+    <div class="dossier">
+      <div class="card"><div class="shot" style="border-bottom:0"><img src="assets/img/attack_stamp-lg.jpg" srcset="assets/img/attack_stamp-md.jpg 800w, assets/img/attack_stamp-lg.jpg 1600w" sizes="(max-width: 860px) 100vw, 620px" width="1600" height="900" loading="lazy" alt="Three squads selected, the orders card open and an attack stamp on a house."></div></div>
+      <ul>
+        <li><b>A 1944 headquarters on screen:</b> unit cards, dispatches and a minimap instead of a modern HUD.</li>
+        <li><b>Stamp the order</b> on the house, the bridge or the crossroads, and the squads go.</li>
+        <li><b>The squads answer by telegram:</b> objective taken, under fire, out of ammunition.</li>
+        <li><b>After the battle,</b> a report for every player, medals and a service record that remembers.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="modes-h">
+  <div class="wrap">
+    <div class="eyebrow">How to play it</div>
+    <h2 id="modes-h">Alone, together or against each other</h2>
+    <div class="modes">
+      <div><div class="n">1v1&ndash;3v3</div><h3>Skirmish</h3><p>Against the AI on a new map every time, from small to huge battlefields.</p></div>
+      <div><div class="n">Online</div><h3>Team battles</h3><p>2v2 and 3v3 with friends over the internet or LAN, with a lobby, chat and room codes.</p></div>
+      <div><div class="n">Campaign</div><h3>Missions</h3><p>A campaign that teaches the war lesson by lesson, mission by mission.</p></div>
+      <div><div class="n">Waves</div><h3>Hold the Line</h3><p>Dig in and hold against wave after wave. How long can the line stand?</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="road-h">
+  <div class="wrap front">
+    <div>
+      <div class="eyebrow">Operations map</div>
+      <h2 id="road-h">The front line today</h2>
+      <p class="lede">Every step of the game's development, taken or planned, pinned on one map. Open it and point at an objective.</p>
+      <!--ROADMAP-TALLY-->
+      <div class="tally"><div class="t-done"><b>14</b><span>objectives taken</span></div><div class="t-now"><b>2</b><span>under attack</span></div><div class="t-ahead"><b>12</b><span>ahead</span></div></div>
+      <div class="bar" role="img" aria-label="14 of 28 objectives taken"><i class="b-done" style="width:50.00%"></i><i class="b-now" style="width:7.14%"></i><i class="b-ahead" style="width:42.86%"></i></div>
+      <ul class="next"><li class="now"><span><b>Playtest headquarters</b> &middot; in progress</span></li><li class="now"><span><b>The 0.5 release gates</b> &middot; next</span></li><li class="ahead"><span><b>On Steam: store page and free demo</b> &middot; ahead</span></li><li class="ahead"><span><b>Guns that recoil right</b> &middot; ahead</span></li></ul>
+      <p></p>
+<!--/ROADMAP-TALLY-->
+      <a class="btn primary" href="roadmap/">Open the roadmap</a>
+    </div>
+    <a class="card" href="roadmap/" style="display:block;text-decoration:none"><div class="shot" style="border-bottom:0"><img src="roadmap/img/c_destroyer.jpg" width="720" height="405" loading="lazy" alt="Concept picture of a Fletcher-class destroyer, one of the objectives ahead."><span class="kind">Concept &middot; ahead</span></div></a>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="log-h">
+  <div class="wrap">
+    <div class="eyebrow">Dispatches from the workshop</div>
+    <h2 id="log-h">Devlog</h2>
+    <!--DEVLOG-LATEST-->
+<div class="posts"><a class="card" href="devlog/2026-11-26-fronts-1944-has-a-home/"><div class="shot"><img src="assets/img/sherman_river-md.jpg" width="800" height="450" loading="lazy" alt=""></div><div class="txt"><span class="when">26 November 2026</span><h3>FRONTS 1944 has a home</h3><p>The game gets its own website, the roadmap goes public, and the road to Steam is drawn on the map.</p></div></a></div>
+<!--/DEVLOG-LATEST-->
+    <p style="margin-top:22px"><a href="devlog/">All devlog posts &rarr;</a></p>
+  </div>
+</section>
+
+<section class="band last" aria-labelledby="last-h">
+  <div class="wrap">
+    <h2 id="last-h">Report to the front</h2>
+    <p class="lede" style="margin:0 auto">The demo plays in your browser, nothing to install. The Steam page is on its way.</p>
+    <div class="ctas">
+      <a class="btn primary" href="https://comeandgetsome.itch.io/fronts-1944">Play the free demo</a>
+      <span class="btn" aria-disabled="true">Wishlist on Steam <small>coming soon</small></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<!--FOOT-->
+<footer class="site-foot">
+  <div class="site-wrap">
+    <div class="cols">
+      <a class="brand" href="./">FRONTS <span>1944</span></a>
+      <ul>
+        <li><a href="https://comeandgetsome.itch.io/fronts-1944">Play the free demo on itch.io</a></li>
+        <li>Steam page: coming soon</li>
+      </ul>
+      <ul>
+        <li><a href="roadmap/">Roadmap</a></li>
+        <li><a href="devlog/">Devlog</a></li>
+      </ul>
+    </div>
+    <p class="fine">FRONTS 1944 is made by one developer in Hungary. Pictures marked <i>Concept</i> are generated targets for the look and are not the game; every other picture is the game's own frame.</p>
+    <p class="fine">&copy; 2026 FRONTS 1944</p>
+  </div>
+</footer>
+<!--/FOOT-->
+</body>
+</html>
