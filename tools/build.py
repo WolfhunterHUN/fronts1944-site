@@ -19,6 +19,7 @@ from pathlib import Path
 SITE = Path(__file__).resolve().parents[1]
 ROADMAP_SRC = Path(r"C:\Playground\UP\RTS-merge\Docs\roadmap")
 ITCH = "https://comeandgetsome.itch.io/fronts-1944"
+DISCORD = "https://discord.gg/7SDqVMBS3U"  # permanent invite, lands on #welcome
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700'
          '&family=Saira+Stencil+One&family=Special+Elite&display=swap">')
@@ -36,18 +37,19 @@ def top(root, here):
                 link("#game", "The game", "game", cls="wide"),
                 link("roadmap/", "Roadmap", "roadmap"),
                 link("devlog/", "Devlog", "devlog"),
+                link(DISCORD, "Discord", "discord", ext=True),
                 link(ITCH, "Play", "play", ext=True, cls="play")])))
 
 
 def foot(root):
     return ('<footer class="site-foot">\n  <div class="site-wrap">\n    <div class="cols">\n'
             '      <a class="brand" href="%s">FRONTS <span>1944</span></a>\n'
-            '      <ul>\n        <li><a href="%s">Play the free demo on itch.io</a></li>\n        <li>Steam page: coming soon</li>\n      </ul>\n'
+            '      <ul>\n        <li><a href="%s">Play the free demo on itch.io</a></li>\n        <li><a href="%s">Join the testers on Discord</a></li>\n        <li>Steam page: coming soon</li>\n      </ul>\n'
             '      <ul>\n        <li><a href="%sroadmap/">Roadmap</a></li>\n        <li><a href="%sdevlog/">Devlog</a></li>\n      </ul>\n'
             '    </div>\n'
             '    <p class="fine">FRONTS 1944 is made by one developer in Hungary. Pictures marked <i>Concept</i> are generated targets '
             'for the look and are not the game; every other picture is the game\'s own frame.</p>\n'
-            '    <p class="fine">&copy; 2026 FRONTS 1944</p>\n  </div>\n</footer>' % (root or "./", ITCH, root, root))
+            '    <p class="fine">&copy; 2026 FRONTS 1944</p>\n  </div>\n</footer>' % (root or "./", ITCH, DISCORD, root, root))
 
 
 def fill(text, name, content):
