@@ -33,6 +33,14 @@
 .hero .note { font: 400 13px/1.4 var(--type); letter-spacing: .05em; color: #cfc8ac; margin: 16px 0 0; }
 @keyframes drift { from { transform: scale(1.02); } to { transform: scale(1.1) translate(-1.5%, -1%); } }
 @media (prefers-reduced-motion: reduce) { .hero img.bg { animation: none; } }
+/* the moving hero: a silent loop that fades in over the still once it plays (assets/motion.js) */
+.hero video.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: 0; transition: opacity 1.4s ease; }
+.hero video.bg.is-playing { opacity: 1; }
+
+/* ---- live pictures: a card's loop fades in over its still while it is on screen */
+.shot video.loop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease, transform .5s ease; }
+.shot video.loop.is-playing { opacity: 1; }
+.card:hover .shot video.loop { transform: scale(1.05); }
 
 /* ---- the trailer band */
 .reel { background: var(--night); color: var(--night-ink); padding: 56px 0 64px; border-top: 3px solid var(--brass); }
@@ -105,6 +113,7 @@
 <main id="main">
 <section class="hero">
   <img class="bg" src="assets/img/paratroopers-lg.jpg" srcset="assets/img/paratroopers-md.jpg 800w, assets/img/paratroopers-lg.jpg 1600w" sizes="100vw" width="1600" height="900" alt="Paratroopers under panelled canopies come down over a river town." fetchpriority="high">
+  <video class="bg" muted loop playsinline preload="none" aria-hidden="true" data-src="assets/video/loop_hero.mp4" data-src-sm="assets/video/loop_hero_sm.mp4"></video>
   <div class="wrap">
     <div class="eyebrow">WW2 real-time strategy &middot; in development</div>
     <h1>FRONTS 1944</h1>
@@ -140,27 +149,27 @@
     <p class="lede" style="margin-top:10px;font-size:16px">What you see here is the current development build. The free demo on itch.io is an earlier version; the next public release brings it up to date.</p>
     <div class="grid3">
       <article class="card">
-        <div class="shot"><img src="assets/img/carpet_street-md.jpg" width="800" height="450" loading="lazy" alt="A carpet raid comes down a village street."></div>
+        <div class="shot"><img src="assets/img/loop_bombers-md.jpg" width="800" height="450" loading="lazy" alt="Bombs from a carpet raid fall into a village street."><video class="loop" muted loop playsinline preload="none" aria-hidden="true" data-src="assets/video/loop_bombers.mp4"></video></div>
         <div class="txt"><h3>Call the bombers</h3><p>Draw a strip and the heavy bombers fly it. Fighters fight for the sky, transports drop paratroopers where you aim, and storms keep them all on the ground.</p></div>
       </article>
       <article class="card">
-        <div class="shot"><img src="assets/img/house_bunker-md.jpg" width="800" height="450" loading="lazy" alt="A house fortified level by level, soldiers at its foot."></div>
+        <div class="shot"><img src="assets/img/loop_house-md.jpg" width="800" height="450" loading="lazy" alt="Ladders against a house being fortified, soldiers at its foot."><video class="loop" muted loop playsinline preload="none" aria-hidden="true" data-src="assets/video/loop_house.mp4"></video></div>
         <div class="txt"><h3>House to house</h3><p>Roofs open where you need to look in. Rooms, doors, grenades and smoke, and engineers who turn a farmhouse into a bunker.</p></div>
       </article>
       <article class="card">
-        <div class="shot"><img src="assets/img/train-md.jpg" width="800" height="450" loading="lazy" alt="A supply train runs past a town fight."></div>
+        <div class="shot"><img src="assets/img/loop_train-md.jpg" width="800" height="450" loading="lazy" alt="A steam train hauls armour on flatcars past a brick house."><video class="loop" muted loop playsinline preload="none" aria-hidden="true" data-src="assets/video/loop_train.mp4"></video></div>
         <div class="txt"><h3>Run the trains</h3><p>Supply trains, stations, depots and trucks carry the ammunition forward. Blow a bridge and the other side waits for its repair crews.</p></div>
       </article>
       <article class="card">
-        <div class="shot"><img src="assets/img/lightning-md.jpg" width="800" height="450" loading="lazy" alt="Lightning over a dug-in line in the rain."></div>
+        <div class="shot"><img src="assets/img/loop_weather-md.jpg" width="800" height="450" loading="lazy" alt="A dug-in line of soldiers in the rain, lightning over the town."><video class="loop" muted loop playsinline preload="none" aria-hidden="true" data-src="assets/video/loop_weather.mp4"></video></div>
         <div class="txt"><h3>Weather and seasons</h3><p>Rain, snow, night and thunderstorms change what you can see, what can fly and how fast the line can move.</p></div>
       </article>
       <article class="card">
-        <div class="shot"><img src="assets/img/zrinyi-md.jpg" width="800" height="450" loading="lazy" alt="A Hungarian Zrinyi II assault gun fires its 105 mm."></div>
+        <div class="shot"><img src="assets/img/loop_zrinyi-md.jpg" width="800" height="450" loading="lazy" alt="A Hungarian Zrinyi II assault gun beside a hangar, the smoke of its 105 mm still in the air."><video class="loop" muted loop playsinline preload="none" aria-hidden="true" data-src="assets/video/loop_zrinyi.mp4"></video></div>
         <div class="txt"><h3>Seven nations</h3><p>Japan, Italy and Hungary joined in November, each with its own soldiers, AI and an arsenal of historic weapons, vehicles, guns and aircraft.</p></div>
       </article>
       <article class="card">
-        <div class="shot"><img src="assets/img/lagoon-md.jpg" width="800" height="450" loading="lazy" alt="A Pacific lagoon with a coral causeway and a half-track."></div>
+        <div class="shot"><img src="assets/img/loop_pacific-md.jpg" width="800" height="450" loading="lazy" alt="Squads move through a palm-lined Pacific outpost."><video class="loop" muted loop playsinline preload="none" aria-hidden="true" data-src="assets/video/loop_pacific.mp4"></video></div>
         <div class="txt"><h3>Coasts and the Pacific</h3><p>Islands with lagoons, jungle, swamps and caves. Swimming tanks and landing craft, ordered from a Navy board.</p></div>
       </article>
     </div>
@@ -172,7 +181,7 @@
     <div class="eyebrow">Field headquarters</div>
     <h2 id="cmd-h">Orders are stamps on the map</h2>
     <div class="dossier">
-      <div class="card"><div class="shot" style="border-bottom:0"><img src="assets/img/attack_stamp-lg.jpg" srcset="assets/img/attack_stamp-md.jpg 800w, assets/img/attack_stamp-lg.jpg 1600w" sizes="(max-width: 860px) 100vw, 620px" width="1600" height="900" loading="lazy" alt="Three squads selected, the orders card open and an attack stamp on a house."></div></div>
+      <div class="card"><div class="shot" style="border-bottom:0"><img src="assets/img/loop_stamp-lg.jpg" srcset="assets/img/loop_stamp-md.jpg 800w, assets/img/loop_stamp-lg.jpg 1280w" sizes="(max-width: 860px) 100vw, 620px" width="1280" height="720" loading="lazy" alt="The headquarters screen: a bombing run drawn over a crossroads, attack stamps on the houses, the dispatches and the air command board."><video class="loop" muted loop playsinline preload="none" aria-hidden="true" data-src="assets/video/loop_stamp.mp4"></video></div></div>
       <ul>
         <li><b>A 1944 headquarters on screen:</b> unit cards, dispatches and a minimap instead of a modern HUD.</li>
         <li><b>Stamp the order</b> on the house, the bridge or the crossroads, and the squads go.</li>
@@ -258,5 +267,6 @@
   </div>
 </footer>
 <!--/FOOT-->
+<script src="assets/motion.js" defer></script>
 </body>
 </html>

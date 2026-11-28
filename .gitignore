@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+
+# Agent notes: local only (Pages would publish them at fronts1944.com/HANDOFF.md)
+HANDOFF.md
+CLAUDE.md
